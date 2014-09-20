@@ -9,7 +9,7 @@
   strictly an interface for the IO.  
 */
 
-void makeFile(char *FILE_PATH); // Makes a text file at specified path
+void makeFile(const char *FILE_NAME); // Makes a text file at specified path
 
 void makeHeader(); // Prints header to the file
 
