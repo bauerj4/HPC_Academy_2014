@@ -1,29 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-
-void makeFile(const char *FILE_NAME){
+FILE * makeFile(const char *FILE_NAME){
 
   FILE * pfile;
 
   pfile = fopen(FILE_NAME,"w");
 
+  return pfile;
+
   //NOTE I would like to include the check of the last two char to include ps extension if not already there
 }
 
-void makeHeader(){
-
-
+void makeHeader(FILE * pFile){
+	  fprintf(pFile, "%%!\n2.835 dup dup scale \n1 exch div setlinewidth \nnewpath \n113 140 moveto \n");
 }
+
+void strokeStep(FILE * pFile, double x, double y){
+
+	fprintf(pFile, "%f %f lineto\n", x, y);
+}
+
+void finishFile(FILE * pFile){
+	fprintf(pFile, "gsave \n0.5 setgray \nstroke \nshowpage");
+	fclose(pFile);
+}
+
 int main()
 
 {
 
   const char * FILE_PATH;
+  FILE * pFile;
 
-  FILE_PATH = "filename";
+  FILE_PATH = "filename.ps";
+  pFile = makeFile(FILE_PATH);
+  makeHeader(pFile);
+  strokeStep(pFile, 2, 2);
 
-  makeFile(FILE_PATH);
-
+  finishFile(pFile);
 
 }
 
