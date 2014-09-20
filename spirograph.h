@@ -17,7 +17,7 @@ double static Y(double t); // y parametrization
   in fractal geometries, and with the spirograph in particular.
 */
 
-double static calculateTimeStep(double x, dounble y, double t, double *timeStep);
+ void  static calculateTimeStep(double x, double y, double t, double *timeStep);
 
 /*
   Performs calculation of spirogaph at a timestep.  Calls timestep recalculation
