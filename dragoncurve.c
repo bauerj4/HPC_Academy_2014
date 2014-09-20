@@ -25,15 +25,15 @@ int* computeTurnDirection(int order)
   int turns[n-1];
   
   int size = sizeof(turns)/sizeof(turns[0]);
-  // printf("%d\n", size);
-  // printf("%d\n", n);
+  printf("size = %d\n", size);
+  printf("n = %d\n", n);
 
   int k,l;
-  for (i = 0; i<n; i++)
+  for (i = 1; i<=n; i++)
     {
       k = i;
       l = 0;
-      printf("Benchmark 1.\n");
+      //printf("Benchmark 1.\n");
       while (k % 2 == 0 && k != 0)
 	{
 	  k = k/2;
@@ -48,21 +48,30 @@ int* computeTurnDirection(int order)
       if (i==0)
 	{
 	  printf("Vertex created.\n");
+	  turns[i] = 0;
 	}
 
-      if ((k % 4) == 1);
+      else if ((k % 4) == 1)
       {
 	turns[i] = 0;
-	printf("%d\n", turns[i]);
+	printf("Right.\n");
+	printf("%d\n",turns[i]);
       }
       
-      if ((k%4) == 3)
+      else if ((k%4) == 3)
 	{
 	  turns[i] = 1;
-	  printf("%d\n", turns[i]);
+	  printf("Left.\n");
+	  printf("%d\n",turns[i]);
 	}
+      //printf("Loop.\n");
     }
-  return turns;
+  for (i=0;i<(n);i++)
+    {
+      printf("Element = %d\n",turns[i]);
+    }
+  printf("Proper size in loop = %d\n", sizeof(turns));
+  return &turns;
 }
 double static X(double t)
 {

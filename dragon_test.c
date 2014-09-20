@@ -3,12 +3,16 @@
 void main(void)
 {
   int i;
-  int *steps = computeTurnDirection(3);
+  int * steps;
+  printf("Proper size = %d",sizeof(*computeTurnDirection(10)));
+  steps = computeTurnDirection(10);
   int size = sizeof(steps) / sizeof(steps[0]);
-  printf("%d\n", size);
+  printf("%d\n", sizeof(steps));
+  printf("%d\n", steps[0]);
+  printf("%d\n", *steps);
   for (i = 0; i < size; i++)
     {
-      //printf("%d\n", size);
-      printf("%d\n",steps[i]);
+      // printf("%d\n", i);
+      printf("step of i = %d\n",steps[i]);
     }
 }
