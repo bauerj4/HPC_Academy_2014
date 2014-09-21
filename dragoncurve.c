@@ -18,7 +18,14 @@ double X(int modulus, double prevx)
 {
   if (modulus % 4 == 2 || modulus % 4 == 0)
     {
-      return (prevx + 1.0);
+      if (modulus % 4 == 2)
+	{
+	  return (prevx + 1.0);
+	}
+      else
+	{
+	  return (prevx - 1);
+	}
     }
 
   else
@@ -31,7 +38,15 @@ double Y(int modulus, double prevy)
 {
   if (modulus % 4 == 1 || modulus % 4 == 3)
     {
-      return (prevy + 1);
+      if (modulus % 4 == 1)
+	{
+	  return (prevy + 1.0);
+	}
+      else
+	{
+	  return (prevy - 1);
+	}
+      // return (prevy + 1);
     }
   
   else 
