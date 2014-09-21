@@ -14,7 +14,35 @@
 
 // Return 0 for right and 1 for left
 
-void computeTurnDirection(FILE * f, int order)
+double X(int modulus, double prevx)
+{
+  if (modulus % 4 == 2 || modulus % 4 == 0)
+    {
+      return (prevx + 1.0);
+    }
+
+  else
+    {
+      return prevx;
+    }
+}
+
+double Y(int modulus, double prevy)
+{
+  if (modulus % 4 == 1 || modulus % 4 == 3)
+    {
+      return (prevy + 1);
+    }
+  
+  else 
+    {
+      return prevy;
+    }
+    
+}
+
+
+void computeTurnDirection(char * FILENAME, int order)
 {
   int i;
   int n = 1;
@@ -66,7 +94,7 @@ void computeTurnDirection(FILE * f, int order)
 	}
       //printf("Loop.\n");
     }
-  for (i=0;i<(n);i++)
+  for (i=0;i<(n-1);i++)
     {
       printf("Element = %d\n",turns[i]);
     }
@@ -86,18 +114,23 @@ if (turns[0] == 0 && i!=0)
      modulus = modulus - 1;
    }
   */
-  makeHead(f,x0,y0);
+  printf("Making file...\n");
+  FILE * f = makeFile(FILENAME);
+  printf("File made. Making header...\n");
+  makeHeader(f);
+  printf("Header made.\n");
   double prevx = x0;
   double prevy = y0; 
   double x,y;
 
-  for (i=0; i < n; i++)
+  for (i=0; i < (n-1); i++)
     {
+      printf("Loop %d\n",i);
       if (turns[i] == 0)
 	{
 	  x = X(modulus,prevx);
-	  y = Y(modulus prevy);
-	  strokeStep(f, x, y);
+	  y = Y(modulus, prevy);
+	  strokeStep(f, prevx, prevy);
 	  prevx = x;
 	  prevy = y;
 	  modulus = modulus + 1;
@@ -106,13 +139,14 @@ if (turns[0] == 0 && i!=0)
       else
 	{
 	  x = X(modulus,prevx);
-	  y = Y(modulus prevy);
+	  y = Y(modulus, prevy);
 	  strokeStep(f, x, y);
 	  prevx = x;
 	  prevy = y;
 	  modulus = modulus - 1;
 	}
     }
+  finishFile(f);
 }
 
 /*
@@ -122,7 +156,10 @@ if (turns[0] == 0 && i!=0)
   n Modulo 4 with a left step being -1 and right being +1
   should take n in absolute value.  
 */
-double static X(int modulus, double prevx)
+
+
+/*
+double X(int modulus, double prevx)
 {
   if (modulus % 4 == 2 || modulus % 4 == 0)
     {
@@ -135,16 +172,16 @@ double static X(int modulus, double prevx)
     }
 }
 
-double static Y(int modulus, double prevy)
+double Y(int modulus, double prevy)
 {
   if (modulus % 4 == 1 || modulus % 4 == 3)
     {
-      return (prevy + 1)
+      return (prevy + 1);
     }
   
   else 
     {
-      return prevy
+      return prevy;
     }
     
 }
@@ -156,9 +193,9 @@ double static calculateTimeStep(double x, double y, double t, double *timeStep)
   return 0.0;
 }
 
-/*
+
 void advanceStep(double *x, double *y, int modulus)
 {
   
 }
-/*
+*/

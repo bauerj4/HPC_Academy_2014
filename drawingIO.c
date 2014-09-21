@@ -12,7 +12,7 @@ FILE * makeFile(const char *FILE_NAME){
   //NOTE I would like to include the check of the last two char to include ps extension if not already there
 }
 
-void makeHeader(FILE * pFile, double x0, double y0){
+void makeHeader(FILE * pFile/*, double x0, double y0*/){
   fprintf(pFile, "%%!\n2.835 dup dup scale \n1 exch div setlinewidth \nnewpath \n182 98 moveto \n");
 }
 

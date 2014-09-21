@@ -14,7 +14,7 @@
 
 FILE * makeFile(const char *FILE_NAME); // Makes a text file at specified path
 
-void makeHeader(FILE *); // Prints header to the file
+void makeHeader(FILE * f); // Prints header to the file
 
-void strokeStep(FILE *, double point1, double point2); // Makes a brush stroke
+void strokeStep(FILE * f, double point1, double point2); // Makes a brush stroke
 
