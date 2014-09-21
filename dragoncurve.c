@@ -5,10 +5,6 @@
 
 */
 
-/*
-  This is so broken right now :'(
-*/
-
 #include "drawingIO.h"
 #include <math.h>
 
@@ -115,8 +111,8 @@ void computeTurnDirection(char * FILENAME, int order)
     }
   // printf("Proper size in loop = %d\n", sizeof(turns));
   int modulus = 0;
-  double x0 = 113.;
-  double y0 = 140.;
+  double x0 = 182.;
+  double y0 = 98.;
   /*
 if (turns[0] == 0 && i!=0)
   {
