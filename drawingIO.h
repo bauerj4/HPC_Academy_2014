@@ -1,3 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 /*
   This file contains the IO functions for writing to Adobe PostScript.
@@ -9,9 +12,9 @@
   strictly an interface for the IO.  
 */
 
-void makeFile(char *FILE_PATH); // Makes a text file at specified path
+FILE * makeFile(const char *FILE_NAME); // Makes a text file at specified path
 
-void makeHeader(); // Prints header to the file
+void makeHeader(FILE *); // Prints header to the file
 
-void strokeStep(double *point1[], double *point2[]); // Makes a brush stroke
+void strokeStep(FILE *, double point1, double point2); // Makes a brush stroke
 
