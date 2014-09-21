@@ -128,7 +128,7 @@ if (turns[0] == 0 && i!=0)
   printf("Making file...\n");
   FILE * f = makeFile(FILENAME);
   printf("File made. Making header...\n");
-  makeHeader(f);
+  makeHeader(f,x0,y0);
   printf("Header made.\n");
   double prevx = x0;
   double prevy = y0; 
