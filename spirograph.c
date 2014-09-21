@@ -7,8 +7,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include "drawingIO.h"
 #include<math.h>
-#include<libps/pslib.h>
+//#include<libps/pslib.h>
 
 int main(int argc, char *argv[]){
   if (argc != 5){
@@ -16,35 +17,48 @@ int main(int argc, char *argv[]){
     return 0;
   }
 
-  PSDoc *psdoc;
+  /*PSDoc *psdoc;
   PS_boot();
   psdoc = PS_new();
   PS_open_file(psdoc, "test.ps");
   PS_close(psdoc);
   PS_delete(psdoc);
-  PS_shutdown();
+  PS_shutdown();*/
 
-  double R = atof(argv[0]);
-  double k = atof(argv[1]);
-  double l = atof(argv[2]);
-  double delta_t = atof(argv[3]);
+  const char * FILE_PATH;
+  FILE *pFile;
+  FILE_PATH = "filename.ps";
+
+  double R = atof(argv[1]);
+  double k = atof(argv[2]);
+  double l = atof(argv[3]);
+  double delta_t = atof(argv[4]);
   if (k > 1.0 || l > 1.0){
     printf("Invalid value for input argument(s)");
     return 0;
   }
-  double r_outer = k * R;
-  double r_inner = 1 - k * R;
-  double x0 = R * ((1 - k) * cos(0.0) + l);
-  double y0 = R * ((1 - k) * sin(0.0) + l);
+  //double r_outer = k * R;
+  //double r_inner = 1. - k * R;
+  double x0 = R + R * ((1 - k) + l * k);
+  double y0 =  R - R * (l * k);
+  printf("%f, %f\n", x0, y0);
   double x = 0;
   double y = 0;
   int n = 0;
-  while( (x != x0) && (y != y0)){
-      x = R * ((1 - k) * cos(n * delta_t) + l);
-      y = R * ((1 - k) * sin(n * delta_t) + l);
-      printf("(%f, %f)\n", x, y);
-      n++;
+  double time;
+  double lk = l * k;
+  double rel = (1 - k) / k;
+  pFile = makeFile(FILE_PATH);
+  makeHeader(pFile);
+  while ( n < 5000 ) {
+    n++;
+    time = delta_t * n; 
+    x = R * ((1 - k) * cos(time) + lk * cos(rel * time)) + R;
+    y = R * ((1 - k) * sin(time) - lk * sin(rel * time)) + R;
+    //printf("(%f, %f)\n", x, y);
+    strokeStep(pFile, x, y);
       //give coordinates to the postscript function?
   }
+  finishFile(pFile);
   return 0;
 }
