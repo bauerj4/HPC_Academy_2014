@@ -14,7 +14,7 @@
 
 // Return 0 for right and 1 for left
 
-int* computeTurnDirection(int order)
+void computeTurnDirection(FILE * f, int order)
 {
   int i;
   int n = 1;
@@ -70,17 +70,83 @@ int* computeTurnDirection(int order)
     {
       printf("Element = %d\n",turns[i]);
     }
-  printf("Proper size in loop = %d\n", sizeof(turns));
-  return &turns;
-}
-double static X(double t)
-{
-  return 0.0;
+  // printf("Proper size in loop = %d\n", sizeof(turns));
+  int modulus = 0;
+  double x0 = 113.;
+  double y0 = 140.;
+  /*
+if (turns[0] == 0 && i!=0)
+  {
+    strokeStep();
+    modulus = modulus + 1;
+  }
+ 
+ else
+   {
+     modulus = modulus - 1;
+   }
+  */
+  makeHead(f,x0,y0);
+  double prevx = x0;
+  double prevy = y0; 
+  double x,y;
+
+  for (i=0; i < n; i++)
+    {
+      if (turns[i] == 0)
+	{
+	  x = X(modulus,prevx);
+	  y = Y(modulus prevy);
+	  strokeStep(f, x, y);
+	  prevx = x;
+	  prevy = y;
+	  modulus = modulus + 1;
+	}
+      
+      else
+	{
+	  x = X(modulus,prevx);
+	  y = Y(modulus prevy);
+	  strokeStep(f, x, y);
+	  prevx = x;
+	  prevy = y;
+	  modulus = modulus - 1;
+	}
+    }
 }
 
-double static Y(double t)
+/*
+  Coordinates may be gotten by storing the orientation.  Consider a North-South-  East-West global orientation.  The algorithm we seek to develop maps a turn
+  onto a global movement. 
+
+  n Modulo 4 with a left step being -1 and right being +1
+  should take n in absolute value.  
+*/
+double static X(int modulus, double prevx)
 {
-  return 0.0;
+  if (modulus % 4 == 2 || modulus % 4 == 0)
+    {
+      return (prevx + 1.0);
+    }
+
+  else
+    {
+      return prevx;
+    }
+}
+
+double static Y(int modulus, double prevy)
+{
+  if (modulus % 4 == 1 || modulus % 4 == 3)
+    {
+      return (prevy + 1)
+    }
+  
+  else 
+    {
+      return prevy
+    }
+    
 }
 
 
@@ -90,8 +156,9 @@ double static calculateTimeStep(double x, double y, double t, double *timeStep)
   return 0.0;
 }
 
-
-void advanceStep(double *x, double *y, double *t)
+/*
+void advanceStep(double *x, double *y, int modulus)
 {
-  printf("Null.");
+  
 }
+/*
